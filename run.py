@@ -4,6 +4,7 @@ from backend.effect import Effect
 from backend.database import DataBaseUsage
 from backend.ATM import Atm
 from backend.Customer import MainCustomer
+from backend.Employee import Employee
 # library i need usage
 from random import choice, choices
 from inquirer import Text, prompt, List,Checkbox
@@ -16,6 +17,7 @@ class MainMenu:
         self.effect = Effect()
         self.customer = MainCustomer()
         self.atm = Atm()
+        self.emp = Employee()
 
 
 
@@ -37,8 +39,11 @@ class MainMenu:
             elif choice['type'] == "Login":
                 self.effect.Clear()
                 data_customer = self.login.Logn_in()
+                if data_customer and "Grade" in (key:= data_customer.keys()):
+                    self.emp.Grade_choice(data=data_customer)
 
-                if data_customer:
+                elif data_customer:
+
                     self.effect.Clear()
                     print(f"{chalk.green("Hello again")} {chalk.yellow(data_customer["FullName"])}")
                     self.customer.main(data=data_customer)
@@ -49,5 +54,5 @@ class MainMenu:
                 return
 
 if __name__ == "__main__":
-    test = MainMenu()
+    test : MainMenu = MainMenu()
     test.Main()

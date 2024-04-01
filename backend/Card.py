@@ -1,4 +1,4 @@
-# class i need import
+# library i need import
 
 from random import randint
 from datetime import datetime

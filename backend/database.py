@@ -1,3 +1,5 @@
+
+# library i need import
 import firebase_admin
 from firebase_admin import credentials,firestore
 from google.cloud.firestore_v1.base_query import FieldFilter
@@ -18,12 +20,12 @@ class DataBaseUsage:
             return False
 
 
-    def SearchData(self,id:str, password:str, collection:str="Customer"):
+    def SearchData(self,id:str, password:str="", collection:str="Customer",atm=False):
         try:
             collection = db.collection(collection)
             status = collection.where(filter=FieldFilter("ID", "==", id)).get()
             convert_data = [data.to_dict()  for data in status ]
-            if convert_data and password == convert_data[0]["Password"]:
+            if (convert_data and password == convert_data[0]["Password"] and password) or (atm and convert_data):
                 return convert_data[0]
             return []
         except:
