@@ -37,12 +37,12 @@ This is a command-line based ATM (Automated Teller Machine) system implemented i
 
 1. Clone the repository or download the source code. 📥
 2. Navigate to the project directory. 📂
-3. Run the `ATM.py` file using Python: `python ATM.py` 🚀
+3. Run the `run.py` file using Python: `python run.py` 🚀
 4. Follow the prompts to perform various ATM operations or customer account management tasks. 💻
 
 ## File Structure
 
-- `ATM.py`: The main file containing the ATM system logic and user interface.
+- `run.py`: The main file containing the ATM system logic and user interface.
 - `Customer.py`: Contains the customer account management logic and user interface.
 - `Account.py`: Contains the sign-up and login functionality.
 - `Card.py`: Contains the `Card` class for generating and managing card information.
