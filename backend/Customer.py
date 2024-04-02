@@ -17,6 +17,13 @@ class MainCustomer:
         self.data = {}
 
     def main(self,data):
+
+        """
+
+        :param data: dict
+        :return: None
+
+        """
         self.data = data
         while True:
 
@@ -84,10 +91,20 @@ class Customer:
     def __init__(self) -> None:
         self.db = DataBaseUsage()
         self.effect = Effect()
-    def Show_information(self,data:dict)-> None:
+    def Show_information(self,data:dict,hide=False)-> None:
+        """
+        :param data: dict
+        :return: None
+
+        """
         for data , info in data.items():
+
+
             if data == "Cart":
                 print(chalk.green(f'Cart: you have {chalk.yellow(len(info))} card'))
+
+            elif data == "Password":
+                print(chalk.green(f'{data} :{chalk.yellow(info[:5])}***** '))
             elif data == "Withdraw" or data == "Transfer" or data == "Deposite":
                 print(chalk.green(f'{data} Transaction :{chalk.yellow(len(info))} '))
             elif data == "Balance":
@@ -98,6 +115,11 @@ class Customer:
                 print(chalk.green(f'{data} :{chalk.yellow(info)}'))
 
     def Show_cards(self,data):
+
+        """
+        :param data: dict
+        :return: None
+        """
         if len(data["Cart"])> 0:
             cards = [
                 List('cards',
@@ -110,6 +132,10 @@ class Customer:
             return
         print(chalk.red('You don\'t have any card !'))
     def Change_CVV(self,data)-> dict:
+        """
+        :param data: dict
+        :return: dict
+        """
         if len(data["Cart"])> 0:
             cards = [
                 List('cards',
@@ -133,6 +159,13 @@ class Customer:
             return {}
         print(chalk.red('You don\'t have any card !'))
     def Romove_account(self,id,password):
+
+        """
+        :param id: int
+        :param password: str
+        :return: bool
+
+        """
         password_check = [Text('confirm', message="Please enter your password")]
         password_check = prompt(password_check)
         if password == password_check['confirm']:
@@ -145,6 +178,10 @@ class Customer:
             return False
 
     def Reset_password(self,data):
+        """
+        :param data: dict
+        :return: dict
+        """
         password_check = [
             Text('old', message="Please enter old password"),
             Text('new', message="Please enter new password",validate=lambda _, x: match(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$', x)),

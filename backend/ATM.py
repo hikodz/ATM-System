@@ -17,6 +17,10 @@ class Atm:
         self.data = {}
 
     def Add_card(self):
+        """
+        Add card to ATM
+        :return: None
+        """
 
         info = [
             Text('Card Number', message="Please Enter Card Number",validate=lambda _, x: match(r'^[0-9]{12,19}$', x),default="1001...."),
@@ -103,14 +107,31 @@ class Transaction(ABC):
         self.effect = Effect()
     @abstractmethod
     def process_transaction(self,data:dict,id=None):
+        """
+        :param data: dict
+        :param id: str
+        :return: None
+
+        """
         pass
 
 class Transfer(Transaction):
+    """
+    :param amount: float
+    :return: None
+    """
     def __init__(self,amount=None) -> None:
         super().__init__("Transfer",amount)
         self.amount
 
     def process_transaction(self,data,id=None):
+
+        """
+        :param data: dict
+        :param id: str
+        :return: None
+
+        """
         if data["Balance"] >= self.amount:
             if data["ID"] != id and (rec := self.db.SearchData(id=id,atm=True)):
                 rec["Balance"] = (rec["Balance"]  + self.amount)
